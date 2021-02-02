@@ -1,0 +1,22 @@
+service: serverless-test
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  stage: test
+  region: us-west-2
+
+functions:
+  hello:
+    handler: lambdas/handler.hello
+    layers:
+      - {Ref: CommonLambdaLayer}
+
+layers:
+  common:
+    path: layers/common
+    name: common-module
+    description: common set of functions
